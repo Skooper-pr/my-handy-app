@@ -1,0 +1,314 @@
+import { motion } from "framer-motion"
+import { Navigation } from "@/components/layout/Navigation"
+import { Footer } from "@/components/layout/Footer"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { FileText, Shield, Users, DollarSign, Clock, AlertTriangle } from "lucide-react"
+
+export default function TermsPage() {
+  const sections = [
+    {
+      icon: FileText,
+      title: "قبول الشروط",
+      content: [
+        "باستخدام منصة الحرفيين، فإنك توافق على الالتزام بهذه الشروط والأحكام.",
+        "إذا لم توافق على هذه الشروط، يرجى عدم استخدام المنصة.",
+        "نحتفظ بالحق في تعديل هذه الشروط في أي وقت، وسنقوم بإعلامك بأي تغييرات مهمة.",
+        "استمرار استخدامك للمنصة بعد إجراء التعديلات يشكل موافقة على الشروط المحدثة."
+      ]
+    },
+    {
+      icon: Users,
+      title: "التسجيل والحسابات",
+      content: [
+        "يجب أن تكون عمر 18 سنة على الأقل لإنشاء حساب في المنصة.",
+        "يجب تقديم معلومات دقيقة وكاملة عند التسجيل.",
+        "أنت مسؤول عن الحفاظ على سرية معلومات حسابك.",
+        "يجب إبلاغنا فوراً في حال اشتباهك بوجود وصول غير مصرح به لحسابك.",
+        "لا允许创建多个 حسابات لنفس المستخدم إلا بإذن كتابي منا."
+      ]
+    },
+    {
+      icon: Shield,
+      title: "الالتزامات والمسؤوليات",
+      content: [
+        "تتعهد باستخدام المنصة للأغراض المشروعة فقط.",
+        "تحظر المشاركة في أي أنشطة غير قانونية أو احتيالية.",
+        "تحظر مشاركة محتوى مسيء أو غير لائق أو ينتهك حقوق الآخرين.",
+        "يجب احترام جميع المستخدمين والحرفيين في المنصة.",
+        "تحظر محاولة الوصول إلى أجزاء غير مصرح بها من المنصة."
+      ]
+    },
+    {
+      icon: DollarSign,
+      title: "المدفوعات والأسعار",
+      content: [
+        "جميع الأسعار المعروضة في المنصة قابلة للتغيير دون إشعار مسبق.",
+        "تتحمل رسوم المعاملات المصرفية أو الدفع الإلكتروني.",
+        "يتم الدفع مباشرة بين العميل والحرفي وفقاً للاتفاق بينهما.",
+        "نحن لسنا مسؤولين عن أي نزاعات مالية بين العملاء والحرفيين.",
+        "قد نفرض رسوماً على الخدمات الإضافية أو المميزات المميزة."
+      ]
+    },
+    {
+      icon: Clock,
+      title: "الخدمات والحجوزات",
+      content: [
+        "جميع الحجوزات خاضعة لتوفر الحرفي والوقت المتاح.",
+        "يجب على العملاء تقديم معلومات دقيقة عن الخدمة المطلوبة.",
+        "يجب على الحرفيين الالتزام بالمواعيد المتفق عليها.",
+        "لديك الحق في إلغاء الحجز وفقاً لسياسة الإلغاء المعمول بها.",
+        "نحن لسنا مسؤولين عن أي تأخير أو إلغاء من قبل الحرفيين."
+      ]
+    },
+    {
+      icon: AlertTriangle,
+      title: "الإخلاء من المسؤولية",
+      content: [
+        "نقدم المنصة كما هي دون أي ضمانات صريحة أو ضمنية.",
+        "لا نضمن دقة أو اكتمال المعلومات المتوفرة في المنصة.",
+        "لسنا مسؤولين عن أي أضرار مباشرة أو غير مباشرة ناتجة عن استخدام المنصة.",
+        "لسنا مسؤولين عن جودة الخدمات المقدمة من قبل الحرفيين.",
+        "لا نتحمل مسؤولية أي خسائر مالية أو غير مالية."
+      ]
+    }
+  ]
+
+  const prohibitions = [
+    "استخدام المنصة لأغراض غير قانونية",
+    "انتحال شخصية شخص آخر أو كيان",
+    "مشاركة معلومات كاذبة أو مضللة",
+    "مهاجمة أو إهانة مستخدمين آخرين",
+    "محاولة اختراق أمان المنصة",
+    "نشر فيروسات أو برامج ضارة",
+    "انتهاك حقوق الملكية الفكرية",
+    "جمع معلومات المستخدمين دون إذن",
+    "إرسال رسائل غير مرغوب فيها",
+    "التدخل في عمل المنصة"
+  ]
+
+  return (
+    <div className="min-h-screen bg-white flex flex-col">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              الشروط والأحكام
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+             欢迎使用منصة الحرفيين. يرجى قراءة هذه الشروط والأحكام بعناية قبل استخدام منصتنا
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-8">
+            {sections.map((section, index) => (
+              <motion.div
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-gray-50 border-b">
+                    <CardTitle className="text-xl flex items-center">
+                      <section.icon className="ml-3 h-6 w-6 text-gray-700" />
+                      {section.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-3">
+                      {section.content.map((paragraph, pIndex) => (
+                        <p key={pIndex} className="text-gray-600 leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Prohibitions Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl flex items-center">
+                  <AlertTriangle className="ml-3 h-6 w-6 text-red-600" />
+                  الأنشطة المحظورة
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-6">
+                  يحظر صراحة القيام بالأنشطة التالية أثناء استخدام منصة الحرفيين:
+                </p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {prohibitions.map((prohibition, index) => (
+                    <div key={index} className="flex items-start space-x-3 space-x-reverse">
+                      <Badge variant="destructive" className="mt-1">
+                        ✗
+                      </Badge>
+                      <p className="text-gray-600 text-sm">{prohibition}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Intellectual Property Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">الملكية الفكرية</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4 text-gray-600">
+                  <p>
+                    جميع المحتويات المتوفرة في منصة الحرفيين، بما في ذلك النصوص والرسومات والشعارات والصور والبرمجيات، 
+                    هي ملكية لمنصة الحرفيين أو مرخصيها ومحمية بموجب قوانين حقوق النشر والعلامات التجارية.
+                  </p>
+                  <p>
+                    يُحظر استخدام أو نسخ أو توزيع أي محتوى من المنصة دون الحصول على إذن كتابي مسبق منا.
+                  </p>
+                  <p>
+                    جميع العلامات التجارية والأسماء التجارية المستخدمة في المنصة هي ملك لأصحابها المعنيين.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Termination Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">إنهاء الخدمة</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4 text-gray-600">
+                  <p>
+                    نحتفظ بالحق في إنهاء أو تعليق حسابك فوراً دون إشعار مسبق في الحالات التالية:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 mr-4">
+                    <li>انتهاك هذه الشروط والأحكام</li>
+                    <li>النشاط الاحتيالي أو غير القانوني</li>
+                    <li>استخدام المنصة بطريقة تضر بالآخرين</li>
+                    <li>عدم الدفع للرسوم المستحقة</li>
+                    <li>طلب منك إغلاق الحساب</li>
+                  </ul>
+                  <p>
+                    عند إنهاء الحساب، ستفقد الوصول إلى جميع الخدمات والميزات المتاحة في المنصة.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Governing Law Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">القانون الحاكم</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4 text-gray-600">
+                  <p>
+                    تخضع هذه الشروط والأحكام لقوانين المملكة العربية السعودية.
+                  </p>
+                  <p>
+                    أي نزاع ينشأ عن استخدام المنصة أو هذه الشروط يتم حله من خلال المحاكم المختصة في المملكة العربية السعودية.
+                  </p>
+                  <p>
+                    في حال وجد أي جزء من هذه الشروط باطلاً أو غير قابل للتنفيذ، فإن هذا لا يؤثر على صحة باقي الأحكام.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Contact Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card className="bg-blue-50 border-blue-200">
+              <CardHeader>
+                <CardTitle className="text-xl text-blue-900">لديك أسئلة؟</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-blue-800 mb-4">
+                  إذا كان لديك أي أسئلة أو استفسارات حول هذه الشروط والأحكام، لا تتردد في التواصل معنا:
+                </p>
+                <div className="space-y-2 text-blue-800">
+                  <p>البريد الإلكتروني: terms@craftsmen-platform.com</p>
+                  <p>الهاتف: +966 50 123 4567</p>
+                  <p>العنوان: الرياض، المملكة العربية السعودية</p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Last Updated */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <p className="text-gray-500 text-sm">
+              آخر تحديث: {new Date().toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <p className="text-gray-500 text-sm mt-1">
+              قد نقوم بتحديث هذه الشروط من وقت لآخر. يرجى مراجعة هذه الصفحة بانتظام لأي تغييرات.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  )
+}

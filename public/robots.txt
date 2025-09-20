@@ -1,0 +1,45 @@
+User-agent: *
+Allow: /
+Allow: /api/
+
+# Sitemap
+Sitemap: https://craftsmen-platform.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/auth/
+Disallow: /api/admin/
+
+# Disallow private pages
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /settings/
+
+# Disallow search results
+Disallow: /search?*
+
+# Allow specific file types
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.png
+Allow: *.gif
+Allow: *.svg
+Allow: *.webp
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

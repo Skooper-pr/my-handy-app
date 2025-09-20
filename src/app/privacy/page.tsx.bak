@@ -1,0 +1,217 @@
+import { motion } from "framer-motion"
+import { Navigation } from "@/components/layout/Navigation"
+import { Footer } from "@/components/layout/Footer"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Shield, Eye, Lock, Database, Globe, Cookie } from "lucide-react"
+
+export default function PrivacyPage() {
+  const sections = [
+    {
+      icon: Shield,
+      title: "مقدمة",
+      content: [
+        "مرحباً بكم في منصة الحرفيين. نحن نلتزم بحماية خصوصيتك وبياناتك الشخصية. توضح هذه السياسة كيف نقوم بجمع واستخدام وحماية معلوماتك عند استخدامك لمنصتنا.",
+        "باستخدام منصتنا، فإنك توافق على جمع واستخدام المعلومات وفقاً لهذه السياسة."
+      ]
+    },
+    {
+      icon: Eye,
+      title: "المعلومات التي نجمعها",
+      content: [
+        "المعلومات الشخصية: الاسم، البريد الإلكتروني، رقم الهاتف، العنوان.",
+        "معلومات الحساب: اسم المستخدم، كلمة المرور، صورة الملف الشخصي.",
+        "معلومات الاستخدام: كيفية استخدامك للمنصة، الصفحات التي تزورها، الوقت الذي تقضيه.",
+        "معلومات التقنية: عنوان IP، نوع المتصفح، نظام التشغيل، معلومات الجهاز.",
+        "معلومات التواصل: الرسائل التي ترسلها، الاستفسارات، التقييمات."
+      ]
+    },
+    {
+      icon: Database,
+      title: "كيف نستخدم معلوماتك",
+      content: [
+        "تقديم الخدمات: توفير الوصول إلى منصتنا وخدماتنا.",
+        "تحسين التجربة: تحسين واجهة المستخدم وإضافة ميزات جديدة.",
+        "التواصل: الرد على استفساراتك وإرسال إشعارات مهمة.",
+        "الأمان: حماية حسابك ومنع الاحتيال والأنشطة غير المسموح بها.",
+        "التسويق: إرسال عروض ترويجية ومعلومات عن خدماتنا (بموافقتك).",
+        "التحليل: تحليل استخدام المنصة لفهم احتياجات المستخدمين."
+      ]
+    },
+    {
+      icon: Lock,
+      title: "حماية المعلومات",
+      content: [
+        "نستخدم تشفير SSL/TLS لحماية البيانات أثناء النقل.",
+        "نخزن المعلومات في خوادم آمنة مع وصول محدود.",
+        "نطبق إجراءات أمان صارمة لمنع الوصول غير المصرح به.",
+        "نقوم بتحديث أنظمتنا بانتظام لضمان أحدث معايير الأمان.",
+        "ندرب موظفينا على أفضل ممارسات حماية البيانات."
+      ]
+    },
+    {
+      icon: Cookie,
+      title: "الكوكيز والتقنيات المشابهة",
+      content: [
+        "نستخدم الكوكيز لتحسين تجربة المستخدم وتذكر تفضيلاتك.",
+        "الكوكيز الضرورية: ضرورية لعمل المنصة بشكل صحيح.",
+        "الكوكيز التحليلية: تساعدنا على فهم كيفية استخدام المنصة.",
+        "الكوكيز التسويقية: تستخدم لعرض إعلانات ذات صلة باهتماماتك.",
+        "يمكنك إدارة تفضيلات الكوكيز من خلال إعدادات المتصفح."
+      ]
+    },
+    {
+      icon: Globe,
+      title: "مشاركة المعلومات",
+      content: [
+        "لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة.",
+        "نشارك المعلومات مع مقدمي الخدمات الذين يساعدون في تشغيل المنصة.",
+        "قد نكشف عن المعلومات عند الضرورة القانونية أو لحماية حقوقنا.",
+        "نشارك المعلومات مع الحرفيين والعملاء لتسهيل تقديم الخدمات.",
+        "نحصل على موافقتك قبل مشاركة معلوماتك لأغراض تسويقية."
+      ]
+    }
+  ]
+
+  const userRights = [
+    "الوصول إلى معلوماتك الشخصية التي نحتفظ بها.",
+    "تصحيح أو تحديث معلوماتك الشخصية.",
+    "حذف معلوماتك الشخصية (في ظل ظروف معينة).",
+    "الاعتراض على معالجة بياناتك.",
+    "سحب موافقتك في أي وقت.",
+    "تقديم شكوى إلى السلطات المختصة."
+  ]
+
+  return (
+    <div className="min-h-screen bg-white flex flex-col">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              سياسة الخصوصية
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              نحن نقدر خصوصيتك ونلتزم بحماية بياناتك الشخصية. تعرّف على كيفية جمع واستخدام وحماية معلوماتك
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-8">
+            {sections.map((section, index) => (
+              <motion.div
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="overflow-hidden">
+                  <CardHeader className="bg-gray-50 border-b">
+                    <CardTitle className="text-xl flex items-center">
+                      <section.icon className="ml-3 h-6 w-6 text-gray-700" />
+                      {section.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="space-y-3">
+                      {section.content.map((paragraph, pIndex) => (
+                        <p key={pIndex} className="text-gray-600 leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* User Rights Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">حقوق المستخدم</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-6">
+                  وفقاً للقوانين المعمول بها، لديك الحقوق التالية فيما يتعلق بمعلوماتك الشخصية:
+                </p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {userRights.map((right, index) => (
+                    <div key={index} className="flex items-start space-x-3 space-x-reverse">
+                      <Badge variant="secondary" className="mt-1">
+                        {index + 1}
+                      </Badge>
+                      <p className="text-gray-600 text-sm">{right}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Contact Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card className="bg-blue-50 border-blue-200">
+              <CardHeader>
+                <CardTitle className="text-xl text-blue-900">لديك أسئلة؟</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-blue-800 mb-4">
+                  إذا كان لديك أي أسئلة أو استفسارات حول سياسة الخصوصية الخاصة بنا، لا تتردد في التواصل معنا:
+                </p>
+                <div className="space-y-2 text-blue-800">
+                  <p>البريد الإلكتروني: privacy@craftsmen-platform.com</p>
+                  <p>الهاتف: +966 50 123 4567</p>
+                  <p>العنوان: الرياض، المملكة العربية السعودية</p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Last Updated */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <p className="text-gray-500 text-sm">
+              آخر تحديث: {new Date().toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <p className="text-gray-500 text-sm mt-1">
+              قد نقوم بتحديث هذه السياسة من وقت لآخر. يرجى مراجعة هذه الصفحة بانتظام لأي تغييرات.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  )
+}

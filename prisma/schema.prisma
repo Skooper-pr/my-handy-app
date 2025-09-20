@@ -1,0 +1,202 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  password      String
+  phone         String?
+  address       Json?
+  role          UserRole @default(CUSTOMER)
+  profileImage  String?
+  isVerified    Boolean  @default(false)
+  isBlocked     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  customer      Customer?
+  craftsman     Craftsman?
+  customerBookings Booking[] @relation("CustomerBooking")
+  craftsmanBookings Booking[] @relation("CraftsmanBooking")
+  customerReviews Review[] @relation("CustomerReview")
+  craftsmanReviews Review[] @relation("CraftsmanReview")
+  customerPayments Payment[] @relation("CustomerPayment")
+  craftsmanPayments Payment[] @relation("CraftsmanPayment")
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Customer {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("customers")
+}
+
+model Craftsman {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profession  String
+  experience  Int      // years of experience
+  description String?
+  skills      Json     // JSON array of skills
+  priceRange  Json     // {min: number, max: number}
+  availability Json     // schedule availability
+  portfolio   Json     // JSON array of image URLs
+  rating      Float    @default(0)
+  reviewsCount Int     @default(0)
+  isApproved  Boolean  @default(false)
+  
+  services    Service[]
+
+  @@map("craftsmen")
+}
+
+model Service {
+  id          String @id @default(cuid())
+  name        String
+  description String?
+  basePrice   Float
+  craftsmanId String
+  categoryId  String?
+  craftsman   Craftsman @relation(fields: [craftsmanId], references: [id], onDelete: Cascade)
+  category    ServiceCategory? @relation(fields: [categoryId], references: [id])
+
+  bookings Booking[]
+
+  @@map("services")
+}
+
+model Booking {
+  id            String      @id @default(cuid())
+  customerId    String
+  customer      User        @relation("CustomerBooking", fields: [customerId], references: [id])
+  craftsmanId   String
+  craftsman     User        @relation("CraftsmanBooking", fields: [craftsmanId], references: [id])
+  serviceId     String?
+  service       Service?    @relation(fields: [serviceId], references: [id])
+  serviceType   String?
+  description   String?
+  scheduledDate DateTime
+  status        BookingStatus @default(PENDING)
+  price         Float?
+  location      Json?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  review Review?
+
+  payments Payment[]
+
+  @@map("bookings")
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  bookingId  String   @unique
+  booking    Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  customerId String
+  customer   User     @relation("CustomerReview", fields: [customerId], references: [id])
+  craftsmanId String
+  craftsman  User     @relation("CraftsmanReview", fields: [craftsmanId], references: [id])
+  rating     Int      // 1-5 stars
+  comment    String?
+  createdAt  DateTime @default(now())
+
+  @@map("reviews")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@map("notifications")
+}
+
+model ServiceCategory {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String?
+  icon        String?
+
+  services Service[]
+
+  @@map("service_categories")
+}
+
+enum UserRole {
+  CUSTOMER
+  CRAFTSMAN
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Payment {
+  id              String      @id @default(cuid())
+  bookingId       String
+  booking         Booking     @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  customerId      String
+  customer        User        @relation("CustomerPayment", fields: [customerId], references: [id])
+  craftsmanId     String
+  craftsman       User        @relation("CraftsmanPayment", fields: [craftsmanId], references: [id])
+  amount          Float
+  currency        String      @default("SAR")
+  provider        String      // STRIPE, PAYPAL, LOCAL
+  transactionId   String      @unique
+  status          PaymentStatus @default(PENDING)
+  paymentMethodId String?
+  metadata        Json?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@map("payments")
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum NotificationType {
+  BOOKING_REQUEST
+  BOOKING_CONFIRMED
+  BOOKING_CANCELLED
+  BOOKING_COMPLETED
+  REVIEW_RECEIVED
+  PAYMENT_CONFIRMED
+  PAYMENT_RECEIVED
+  SYSTEM
+}
